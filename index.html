@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Try FitMe</title>
-  <meta name="description" content="FitMe helps shoppers choose the right size and see themselves before buying." />
+  <meta name="description" content="FitMe helps fashion stores reduce size returns and increase conversion with sizing + virtual try-on." />
   <style>
     body {
       margin: 0;
@@ -21,11 +21,13 @@
     h1 {
       font-size: 48px;
       margin-bottom: 16px;
+      line-height: 1.15;
     }
     p {
       font-size: 20px;
       color: #cbd5f5;
-      margin-bottom: 40px;
+      margin-bottom: 28px;
+      line-height: 1.6;
     }
     .cta {
       display: inline-block;
@@ -34,52 +36,179 @@
       color: #022c22;
       text-decoration: none;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 10px;
     }
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 24px;
-      margin-top: 80px;
+      margin-top: 60px;
     }
     .card {
       background: #020617;
       padding: 24px;
       border-radius: 14px;
       border: 1px solid #1e293b;
+      text-align: left;
     }
     .card h3 {
-      margin-bottom: 10px;
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+    .card p {
+      margin: 0;
+      font-size: 16px;
+      color: #cbd5f5;
+    }
+
+    /* Language switch */
+    .lang-switch {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1000;
+      background: rgba(2, 6, 23, 0.6);
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 8px 10px;
+      backdrop-filter: blur(8px);
+    }
+    .lang-switch button {
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      color: #f8fafc;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 10px;
+    }
+    .lang-switch button.active {
+      background: #1e293b;
+    }
+
+    /* Arabic tweaks */
+    .rtl {
+      direction: rtl;
+      text-align: center;
+    }
+    .rtl .card {
+      text-align: right;
+    }
+
+    /* Small text */
+    .subnote {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #94a3b8;
     }
   </style>
 </head>
+
 <body>
+  <!-- Language Switch -->
+  <div class="lang-switch" aria-label="Language switch">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-ar" onclick="setLang('ar')">عربي</button>
+  </div>
+
   <div class="container">
-    <h1>Try FitMe</h1>
-    <p>
-      Help your customers choose the right size<br/>
-      and see themselves before buying.
-    </p>
+    <!-- English -->
+    <div id="en" class="lang">
+      <h1>Reduce Size Returns. Increase Conversion.</h1>
+      <p>
+        Let shoppers see themselves and choose the right size before buying — directly on your product page.
+      </p>
 
-    <a class="cta" href="mailto:hello@tryfitme.org">
-      Talk to us
-    </a>
+      <a class="cta" href="mailto:hello@tryfitme.org">Request Early Access</a>
+      <div class="subnote">Early testing • Shopify-friendly • Built to reduce size-related returns</div>
 
-    <div class="features">
-      <div class="card">
-        <h3>Reduce Returns</h3>
-        <p>Lower size-related returns with smart recommendations.</p>
+      <div class="features">
+        <div class="card">
+          <h3>Why FitMe?</h3>
+          <p>
+            Size issues are one of the biggest reasons for fashion returns.
+            FitMe combines size recommendation with visual confidence.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>How it works</h3>
+          <p>
+            Customers enter height, weight, and fit preference → FitMe recommends the best size →
+            customers see themselves wearing the product → they buy with confidence.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>What merchants gain</h3>
+          <p>
+            Fewer returns, higher conversion, fewer “Which size should I choose?” messages, and easy Shopify integration.
+          </p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Increase Conversion</h3>
-        <p>Customers buy with confidence when they see themselves.</p>
-      </div>
-      <div class="card">
-        <h3>Easy Integration</h3>
-        <p>Works seamlessly with Shopify stores.</p>
+    </div>
+
+    <!-- Arabic -->
+    <div id="ar" class="lang rtl" style="display:none;">
+      <h1>قلّل إرجاع المقاسات. وارفع نسبة الشراء.</h1>
+      <p>
+        دع عملاءك يرون أنفسهم ويختاروا المقاس الصحيح قبل الدفع — مباشرة داخل صفحة المنتج.
+      </p>
+
+      <a class="cta" href="mailto:hello@tryfitme.org">اطلب تجربة مبكرة</a>
+      <div class="subnote">تجربة مبكرة • مناسب لـ Shopify • يهدف لتقليل الإرجاع بسبب المقاسات</div>
+
+      <div class="features">
+        <div class="card">
+          <h3>لماذا FitMe؟</h3>
+          <p>
+            المقاس الخاطئ من أكبر أسباب إرجاع الملابس.
+            FitMe يجمع بين توصية المقاس والرؤية البصرية لرفع الثقة قبل الشراء.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>كيف يعمل؟</h3>
+          <p>
+            يدخل العميل الطول والوزن وتفضيل المقاس → يقترح FitMe أفضل مقاس →
+            يرى العميل نفسه بالمنتج → يشتري بثقة.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>ماذا يستفيد المتجر؟</h3>
+          <p>
+            تقليل الإرجاع، زيادة التحويل، تقليل أسئلة “أي مقاس أختار؟”، وتكامل سهل مع Shopify.
+          </p>
+        </div>
       </div>
     </div>
   </div>
+
+  <script>
+    function setLang(lang) {
+      var en = document.getElementById('en');
+      var ar = document.getElementById('ar');
+      var btnEn = document.getElementById('btn-en');
+      var btnAr = document.getElementById('btn-ar');
+
+      if (lang === 'ar') {
+        en.style.display = 'none';
+        ar.style.display = 'block';
+        btnEn.classList.remove('active');
+        btnAr.classList.add('active');
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+      } else {
+        ar.style.display = 'none';
+        en.style.display = 'block';
+        btnAr.classList.remove('active');
+        btnEn.classList.add('active');
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+      }
+    }
+  </script>
 </body>
 </html>
